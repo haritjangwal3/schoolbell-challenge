@@ -1,0 +1,40 @@
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="id" required #id="ngModel" [(ngModel)]="service.formData.id" class="form-control" >
+    <div class="form-group">
+        <label for="name">Full Name</label>
+        <input name="name" required #name="ngModel" [(ngModel)]="service.formData.name" class="form-control" >
+        <div class="validation-error" *ngIf="name.invalid && name.touched" >This field is required.</div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="age">Age</label>
+            <input name="age" #age="ngModel" [(ngModel)]="service.formData.age" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="gender">Gender</label>
+            <input name="gender" #gender="ngModel" [(ngModel)]="service.formData.gender" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="department">Department</label>
+        <input name="department" #department="ngModel" [(ngModel)]="service.formData.department" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="manager_id">manager_id</label>
+        <input name="manager_id" required #manager_id="ngModel" [(ngModel)]="service.formData.manager_id" class="form-control" >
+        <div class="validation-error" *ngIf="manager_id.invalid && manager_id.touched" >This field is required.</div>
+    </div>
+    <div class="form-group">
+        <label for="salary">Salary</label>
+        <input name="salary" #salary="ngModel" [(ngModel)]="service.formData.salary" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="joined">Joined</label>
+        <input name="joined" #joined="ngModel" [(ngModel)]="service.formData.joined" class="form-control">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-large btn-success">
+            Submit
+        </button>
+    </div>
+</form>
