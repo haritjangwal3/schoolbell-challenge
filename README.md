@@ -13,7 +13,8 @@ Run `npm install` to install the dependencies .
 
 Run `ng serve` to run the application .
 
-## Run API via node
+## Run API 
+
 
 Run `node index.js` to start API service. (Required)
 

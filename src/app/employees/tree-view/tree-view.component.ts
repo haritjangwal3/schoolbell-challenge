@@ -12,20 +12,18 @@ const $ = go.GraphObject.make;
 
 export class TreeViewComponent implements OnInit {
   empJSON : JSON;
-  public newModel : go.TreeModel;
   public diagram: go.Diagram = null;
   
   constructor(public service : EmployeeService) { }
 
   ngOnInit(): void {
-   
+    
   }
 
   @Input()
   public model: go.Model;
 
-  @Output()
-  public nodeClicked = new EventEmitter();
+  
 
   public ngAfterViewInit(){
     this.diagram = $(go.Diagram, 'myDiagramDiv', 
@@ -90,7 +88,7 @@ export class TreeViewComponent implements OnInit {
             },
             new go.Binding('source', 'key', function(key) {
               if (key < 0 || key > 16) return ''; // There are only 16 images on the server
-              return 'assets/HS' + key + '.png';
+              return 'assets/HS.png';
             })
           ),
           // define the panel where the text will appear
@@ -142,9 +140,9 @@ export class TreeViewComponent implements OnInit {
 
 
     // when the selection changes, emit event to app-component updating the selected node
-    this.diagram.addDiagramListener('ChangedSelection', (e) => {
-      const node = this.diagram.selection.first();
-      this.nodeClicked.emit(node);
-    });
+    // this.diagram.addDiagramListener('ChangedSelection', (e) => {
+    //   const node = this.diagram.selection.first();
+    //   this.nodeClicked.emit(node);
+    // });
   }
 }

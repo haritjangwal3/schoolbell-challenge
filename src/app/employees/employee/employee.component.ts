@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/shared/employee.service';
-
+import { EmployeeListComponent } from '../employee-list/employee-list.component'
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { from } from 'rxjs';
@@ -17,6 +17,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetForm();
+    this.service.refreshService();
   }
 
   resetForm(form? : NgForm){
@@ -49,7 +50,7 @@ export class EmployeeComponent implements OnInit {
     this.service.insertEmployee(form.value).subscribe(res => {
       this.toaster.success('Inserted Successfully', 'SchoolBell')
       this.resetForm(form);
-      this.service.getEmployees();
+      this.service.refreshService();
     })
   }
 
@@ -57,7 +58,7 @@ export class EmployeeComponent implements OnInit {
     this.service.updateEmployee(form.value).subscribe(res => {
       this.toaster.info('Updated Successfully', 'SchoolBell')
       this.resetForm(form);
-      this.service.getEmployees();
+      this.service.refreshService();
     })
   }
   

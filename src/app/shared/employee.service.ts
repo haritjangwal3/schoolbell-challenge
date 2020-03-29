@@ -5,34 +5,45 @@ import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import * as go from 'gojs';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  OnInit(){
-
-    this.getEmployees();
-  }
-  
+  readonly rootURL = 'http://localhost:3000/';
   formData : Employee;
   emp_list : Employee[];
   dataSource : any;
-  
-
-  readonly rootURL = 'http://localhost:3000/';
+  newModel : go.TreeModel;
 
   constructor(private http : HttpClient) { }
 
+  OnInit(){
+    let employees = [];
+    this.getEmployees()
+    .subscribe(res=>{
+      this.emp_list = res;
+      this.dataSource = new MatTableDataSource(this.emp_list);
+      res.forEach(emp => {
+        if(emp.manager_id == 0){
+          let objEmp = {'key': emp.id, 'name': emp.name, 'title':emp.department };
+        }
+        let objEmp = {'key': emp.id, 'name': emp.name, 'title':emp.department, 'parent': emp.manager_id };
+        employees.push(objEmp);
+      });
+      this.newModel = new go.TreeModel(employees);
+      console.log(this.newModel);
+    });
+  }
+  
+  refreshService(){
+    this.OnInit();
+  }
+  
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.rootURL+ 'employees');
-    // .toPromise().then(res => {
-    //   this.emp_list = res as Employee[];
-    //   this.dataSource = new MatTableDataSource(this.emp_list);
-    //   // this.generateTreeModel(this.emp_list)
-    // })
   }
 
   insertEmployee(formData : Employee){
@@ -45,7 +56,6 @@ export class EmployeeService {
   }
 
   deleteEmployee(id : Number){
-    console.log(this.rootURL+ 'employees/'+ id);
     return this.http.delete(this.rootURL+ 'employees/'+ id, { responseType: 'text' });
   }
 }

@@ -7,7 +7,7 @@
 </mat-form-field>
 
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<table mat-table [dataSource]="service.dataSource" matSort class="mat-elevation-z8">
 
 <!-- Position Column -->
 <ng-container matColumnDef="id">
@@ -15,23 +15,33 @@
     <td mat-cell *matCellDef="let emp" (click)="populateForm(emp)"> {{emp.id}} </td>
 </ng-container>
 
-<!-- Name Column -->
 <ng-container matColumnDef="name">
     <th (click)="addSorting()"  mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let emp"  (click)="populateForm(emp)"> {{emp.name}} </td>
 </ng-container>
 
-<!-- Weight Column -->
+<ng-container matColumnDef="age">
+    <th (click)="addSorting()" mat-header-cell mat-sort-header *matHeaderCellDef> age </th>
+    <td mat-cell *matCellDef="let emp" (click)="populateForm(emp)"> {{emp.age}} </td>
+</ng-container>
+<ng-container matColumnDef="gender">
+    <th (click)="addSorting()" mat-header-cell mat-sort-header *matHeaderCellDef> gender </th>
+    <td mat-cell *matCellDef="let emp" (click)="populateForm(emp)"> {{emp.gender}} </td>
+</ng-container>
+<ng-container matColumnDef="department">
+    <th (click)="addSorting()" mat-header-cell mat-sort-header *matHeaderCellDef> department </th>
+    <td mat-cell *matCellDef="let emp" (click)="populateForm(emp)"> {{emp.department}} </td>
+</ng-container>
+
 <ng-container matColumnDef="salary">
     <th (click)="addSorting()" mat-header-cell mat-sort-header *matHeaderCellDef> Salary </th>
     <td mat-cell *matCellDef="let emp" (click)="populateForm(emp)"> {{emp.salary}} </td>
 </ng-container>
 
 
-<!-- Symbol Column -->
-<ng-container matColumnDef="manager_id">
-    <th (click)="addSorting()" mat-header-cell mat-sort-header *matHeaderCellDef> Manager ID </th>
-    <td mat-cell *matCellDef="let emp" (click)="populateForm(emp)"> {{emp.manager_id}} </td>
+<ng-container matColumnDef="manager_name">
+    <th (click)="addSorting()" mat-header-cell mat-sort-header *matHeaderCellDef> Manager Name</th>
+    <td mat-cell *matCellDef="let emp" (click)="populateForm(emp)"> {{emp.manager_name}} </td>
 </ng-container>
 <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef> Delete </th>

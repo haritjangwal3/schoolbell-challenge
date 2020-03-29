@@ -2,14 +2,15 @@
     <h1 class="display-4 text-center">Employee Register</h1>
     <hr>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <app-employee></app-employee>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <app-employee-list></app-employee-list>
         </div>
         <div class="col-md-12">
-            <app-tree-view *ngIf="newModel" [model]='newModel' ></app-tree-view>
+            <h4>Refresh the page to see updated Tree Model</h4>
+            <app-tree-view *ngIf="service.newModel" [model]='service.newModel' ></app-tree-view>
         </div>
     </div>
 </div>

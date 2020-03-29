@@ -8,6 +8,9 @@
 |   |  +--● employee-list
 |   |  |  |--employee-list.component.ts|.html|.css
 |   |  |
+|   |  +--● tree-view
+|   |  |  |--tree-view.component.ts|.html|.css
+|   |  |
 |   |  +--● shared
 |   |     |--employee.service.ts
 |   |     |--employee.model.ts

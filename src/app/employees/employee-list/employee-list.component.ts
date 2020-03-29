@@ -12,9 +12,9 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name',  'salary', 'manager_id', 'delete'];
-  public employees = [];
-  public dataSource : any;
+  displayedColumns: string[] = ['id', 'name','age', 'gender' , 'salary', 'department' , 'manager_name', 'delete'];
+  // public employees = [];
+  // public dataSource : any;
 
   @ViewChild(MatSort) sort: MatSort;
   
@@ -22,17 +22,12 @@ export class EmployeeListComponent implements OnInit {
     public toaster : ToastrService) { }
 
   ngOnInit(): void {
-    this.service.getEmployees()
-      .subscribe(res => {
-          this.employees = res;
-          this.dataSource = new MatTableDataSource(this.employees);
-        }
-      );
+    this.service.refreshService()
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.service.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   populateForm(emp : Employee){
@@ -43,11 +38,11 @@ export class EmployeeListComponent implements OnInit {
     this.service.deleteEmployee(id).subscribe(res => {
       console.log(res);
       this.toaster.warning('Deleted successfully', 'SchoolBell');
-      this.service.getEmployees();
+      this.ngOnInit()
     })
   }
 
   addSorting(){
-    this.dataSource.sort = this.sort;
+    this.service.dataSource.sort = this.sort;
   }
 }
