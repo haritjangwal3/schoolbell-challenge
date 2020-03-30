@@ -15,7 +15,7 @@ Run `ng serve` to run the application .
 
 ## Run API 
 
-
+type `cd db` (get into db directory) and 
 Run `node index.js` to start API service. (Required)
 
 Configure DB connection inside db/index.js
