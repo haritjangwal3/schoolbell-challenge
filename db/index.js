@@ -1,6 +1,18 @@
+
 const mysql = require('mysql');
 const express = require('express');
 const body_parser = require('body-parser');
+
+// Database Connection
+
+const db = {
+    host : 'localhost',
+    user : 'root',
+    passowrd : '',
+    database : 'schoolbell',
+    multipleStatements: true
+}
+
 
 var app = express();
 app.use(body_parser.json());
@@ -11,15 +23,7 @@ app.use(function(request, res, next) {
     next();
 });
 
-var mysql_con = mysql.createConnection(
-    {
-        host : 'localhost',
-        user : 'root',
-        passowrd : '',
-        database : 'schoolbell',
-        multipleStatements: true
-    }
-);
+var mysql_con = mysql.createConnection(db);
 
 mysql_con.connect((err)=> {
     if(!err)
