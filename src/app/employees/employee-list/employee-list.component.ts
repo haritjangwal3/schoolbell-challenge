@@ -31,6 +31,8 @@ export class EmployeeListComponent implements OnInit {
   }
 
   populateForm(emp : Employee){
+    const date = new Date(emp.joined);
+    emp.joined = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()
     this.service.formData = Object.assign({}, emp);
   }
 

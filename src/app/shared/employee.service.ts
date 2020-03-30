@@ -34,7 +34,6 @@ export class EmployeeService {
         employees.push(objEmp);
       });
       this.newModel = new go.TreeModel(employees);
-      console.log(this.newModel);
     });
   }
   

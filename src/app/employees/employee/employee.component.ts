@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/shared/employee.service';
-import { EmployeeListComponent } from '../employee-list/employee-list.component'
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { from } from 'rxjs';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-employee',
@@ -36,14 +35,25 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  validateForm(form: NgForm){
+    if(form.value.name != '' && form.value.manager_id != ''){
+      return true
+    }
+    this.toaster.warning('Name & Manager ID is required', 'SchoolBell')
+    return false
+  }
+
   onSubmit(form: NgForm) {
     if(form.value.id == null){
-      this.insertRecord(form)
+      if(this.validateForm(form)){
+        this.insertRecord(form)
+      }
     }
     else {
-      this.updateRecord(form);
+      if(this.validateForm(form)){
+        this.updateRecord(form);
+      }
     }
-    
   }
 
   insertRecord(form: NgForm){
@@ -55,7 +65,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   updateRecord(form: NgForm){
+    let date = new Date(form.value.joined);
+    form.value.joined = date.toISOString()
     this.service.updateEmployee(form.value).subscribe(res => {
+      console.log(res);
       this.toaster.info('Updated Successfully', 'SchoolBell')
       this.resetForm(form);
       this.service.refreshService();

@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 COPY . .
-RUN npm run start 
+RUN npm run build 
 
 #Step 2
 FROM nginx:alpine as nginx-stage

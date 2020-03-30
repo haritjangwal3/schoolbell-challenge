@@ -36,7 +36,7 @@ app.get('/employees', (req, res)=>{
         if(!err)
         res.send(rows);
         else
-        console.log(err);
+        res.send(err);
 
     })
 });
@@ -47,8 +47,7 @@ app.get('/employees/:id', (req, res)=>{
         if(!err)
         res.send(rows);
         else
-        console.log(err);
-
+        res.send(err);
     })
 });
 
@@ -59,7 +58,6 @@ app.delete('/employees/:id', (req, res)=>{
         res.send('Deleted employee.');
         else
         res.send(err);
-
     })
 });
 
@@ -77,7 +75,7 @@ app.post('/employees', (req, res)=>{
                     res.send("Employee added with id " + element[0].id);
             })
         else
-            console.log(err);
+            res.send(err);
     })
 });
 
@@ -85,6 +83,7 @@ app.post('/employees', (req, res)=>{
 
 app.put('/employees', (req, res)=>{
     var emp = req.body;
+    console.log(emp);
     var sql = "SET @id = ?; SET @name = ?; SET @age = ?; \
     SET @gender = ?; SET @department = ?; SET @manager_id = ?; SET @salary = ?; \
     SET @joined = ?; \

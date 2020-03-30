@@ -1,7 +1,7 @@
 <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
     <input type="hidden" name="id" required #id="ngModel" [(ngModel)]="service.formData.id" class="form-control" >
     <div class="form-group">
-        <label for="name">Full Name</label>
+        <label for="name">Full Name<b style="color: red;">*</b></label>
         <input name="name" required #name="ngModel" [(ngModel)]="service.formData.name" class="form-control" >
         <div class="validation-error" *ngIf="name.invalid && name.touched" >This field is required.</div>
     </div>
@@ -20,7 +20,7 @@
         <input name="department" #department="ngModel" [(ngModel)]="service.formData.department" class="form-control">
     </div>
     <div class="form-group">
-        <label for="manager_id">manager_id</label>
+        <label for="manager_id">Manager ID<b style="color: red;">*</b></label>
         <input name="manager_id" required #manager_id="ngModel" [(ngModel)]="service.formData.manager_id" class="form-control" >
         <div class="validation-error" *ngIf="manager_id.invalid && manager_id.touched" >This field is required.</div>
     </div>
@@ -30,11 +30,14 @@
     </div>
     <div class="form-group">
         <label for="joined">Joined</label>
-        <input name="joined" #joined="ngModel" [(ngModel)]="service.formData.joined" class="form-control">
+        <input name="joined" class="form-control" type="text" bsDatepicker  #joined="ngModel" [(ngModel)]="service.formData.joined" class="form-control">
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-large btn-success">
             Submit
         </button>
+        <a (click)="resetForm(form)" class="btn btn-large btn-success" style="margin-left: 10px;color:white">
+            Reset
+        </a>
     </div>
 </form>

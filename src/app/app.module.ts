@@ -21,6 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { TreeViewComponent } from './employees/tree-view/tree-view.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -43,7 +44,8 @@ import { TreeViewComponent } from './employees/tree-view/tree-view.component';
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]
